@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "天气",
+    "usingComponents": {
+        "i-button": "/iview/button/index"
+    }
+}
