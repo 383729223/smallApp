@@ -41,7 +41,8 @@
 </template>
 
 <script>
-let baseUrl = require("../../utils/index")
+// let baseUrl = require("../../utils/index")
+import URL from '../../utils/index'
 import store from './store'
 export default {
   data () {
@@ -58,13 +59,15 @@ export default {
     requestFn(timeDay) {
         let that = this
         wx.request({
-            url: baseUrl.default.juheUrl + 'laohuangli/d?date=' + timeDay + '&key=707488f53cdf13407a7f5ffc5b5b3e99',
+            // url: baseUrl.default.juheUrl + 'laohuangli/d?date=' + timeDay + '&key=707488f53cdf13407a7f5ffc5b5b3e99',
+            url: URL.xingwl + 'api/small/time/d?date=' + timeDay + '&key=707488f53cdf13407a7f5ffc5b5b3e99',
             success(res) {
                 store.commit("changeData",res.data.result)
             }
         })
         wx.request({
-            url: baseUrl.default.juheUrl + 'laohuangli/h?date=' + timeDay + '&key=707488f53cdf13407a7f5ffc5b5b3e99',
+            // url: baseUrl.default.juheUrl + 'laohuangli/h?date=' + timeDay + '&key=707488f53cdf13407a7f5ffc5b5b3e99',
+            url:  URL.xingwl + 'api/small/time/h?date=' + timeDay + '&key=707488f53cdf13407a7f5ffc5b5b3e99',
             success(res1) {
                 store.commit("changeDataHours",res1.data.result)
 

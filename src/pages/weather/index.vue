@@ -34,6 +34,7 @@
 </template>
 <script>
 import store from './store'
+import URL from '../../utils/index'
 export default {
     data () {
         return {
@@ -225,7 +226,7 @@ export default {
     },
 
     mounted(){
-        // console.log(store)
+        // console.log(URL.xingwl)
         let that = this
             //腾讯地图KEY： VINBZ-4E4CI-UUNGF-5U32E-66JDO-6RB66
         wx.getLocation({
@@ -233,14 +234,18 @@ export default {
             success(res) {
                 store.commit("changeLatitude",res.latitude)
                 store.commit("changeLongitude",res.longitude)
-                
+                let location=res.latitude+ "," + res.longitude
+                console.log(res.latitude,res.longitude)
                 wx.request({
-                    url: "https://apis.map.qq.com/ws/geocoder/v1/?location=" + res.latitude + "," + res.longitude + "&key=VINBZ-4E4CI-UUNGF-5U32E-66JDO-6RB66",
+                    // url: "https://apis.map.qq.com/ws/geocoder/v1/?location=" + location + "&key=VINBZ-4E4CI-UUNGF-5U32E-66JDO-6RB66",
+                    url: URL.xingwl+"api/small/map?location=" + location + "&key=VINBZ-4E4CI-UUNGF-5U32E-66JDO-6RB66",
                     success(resCity) {
+                        console.log(resCity)
                         let city = resCity.data.result.address_component.city
                         city = city.slice(0, city.indexOf("市"))
                         wx.request({
-                            url: "http://apis.juhe.cn/simpleWeather/query?city=" + city + "&key=8428907322fc2a06bb0ecc8d8469e5f9",
+                            // url: "http://apis.juhe.cn/simpleWeather/query?city=" + city + "&key=8428907322fc2a06bb0ecc8d8469e5f9",
+                            url: URL.xingwl+"api/small/weather?city=" + city + "&key=8428907322fc2a06bb0ecc8d8469e5f9",
                             success(weatherData) {
                                 // 天气背景图片
                                 that.changeWeatherBgFn(weatherData.data.result.realtime.info)
@@ -340,18 +345,26 @@ export default {
         display: flex;
         align-items: center;
         p{
-            width: 100%;
             text-align: center;
         }
-        .futureDay{}
-        .futureWeather{}
+        .futureDay{
+            flex:1;
+        }
+        .futureWeather{
+            flex:1;
+        }
         .futureIcon{
+            width:80rpx;
             height: 50rpx;
             font-size: 38rpx;
             
         }
-        .futureTemp{}
-        .futureFeng{}
+        .futureTemp{
+            flex:1;
+        }
+        .futureFeng{
+            width:30%;
+        }
     }
   }
 

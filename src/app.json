@@ -37,19 +37,8 @@
                 "iconPath": "static/tabs/weather.png",
                 "selectedIconPath": "static/tabs/weather-ac.png",
                 "text": "天气"
-            },
-            {
-                "pagePath": "pages/map/main",
-                "iconPath": "static/tabs/map.png",
-                "selectedIconPath": "static/tabs/map-ac.png",
-                "text": "地图"
-            },
-            {
-                "pagePath": "pages/user/main",
-                "iconPath": "static/tabs/user.png",
-                "selectedIconPath": "static/tabs/user-ac.png",
-                "text": "我的"
             }
+
         ],
         "position": "bottom"
     }

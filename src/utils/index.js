@@ -19,9 +19,11 @@ export function formatTime(date) {
 }
 
 const juheUrl = "http://v.juhe.cn/"
+const xingwl = "https://www.xingwl.cn/"
 
 export default {
     formatNumber,
     formatTime,
-    juheUrl
+    juheUrl,
+    xingwl
 }
