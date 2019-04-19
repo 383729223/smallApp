@@ -1,20 +1,20 @@
 <template>
   <div class="homeBox">
      <div class="yangli">
-        <picker mode="date" :value="dateDay" start="1600-01-01" end="6000-01-01" @change="bindDateChange">
+        <picker mode="date" :value="dateDay" start="1600-01-01" end="6000-01-01" @change="bindDateChange" v-if="dataD.yi!=''">
           <div style="display:inline-block;">{{dataD.yangli}}</div><div class="iconfont icontubiaozhizuo-" style="display:inline-block;color:#666;margin-left:8rpx;"></div>
         </picker>
       </div>
-      <div class="yinli">{{dataD.yinli}}</div>
+      <div class="yinli" v-if="dataD.yi!=''">{{dataD.yinli}}</div>
       <div class="ji-yi">
-        <div class="yiTxt"><div class="yibgFont">宜</div>{{dataD.yi}}</div>
-        <div class="jiTxt"><div class="jibgFont">忌</div>{{dataD.ji}}</div>
+        <div class="yiTxt"><div class="yibgFont" v-if="dataD.yi!=''">宜</div>{{dataD.yi}}</div>
+        <div class="jiTxt"><div class="jibgFont" v-if="dataD.yi!=''">忌</div>{{dataD.ji}}</div>
       </div>
-      <div class="lineTxt"><div class="titleStyle">拜祭</div>{{dataD.baiji}}</div>
-      <div class="lineTxt"><div class="titleStyle">冲煞</div>{{dataD.chongsha}}</div>
-      <div class="lineTxt"><div class="titleStyle">吉神</div>{{dataD.jishen}}</div>
-      <div class="lineTxt"><div class="titleStyle">凶神</div>{{dataD.xiongshen}}</div>
-      <div class="lineTxt"><div class="titleStyle">五行</div>{{dataD.wuxing}}</div>
+      <div class="lineTxt"><div class="titleStyle" v-if="dataD.yi!=''">拜祭</div>{{dataD.baiji}}</div>
+      <div class="lineTxt"><div class="titleStyle" v-if="dataD.yi!=''">冲煞</div>{{dataD.chongsha}}</div>
+      <div class="lineTxt"><div class="titleStyle" v-if="dataD.yi!=''">吉神</div>{{dataD.jishen}}</div>
+      <div class="lineTxt"><div class="titleStyle" v-if="dataD.yi!=''">凶神</div>{{dataD.xiongshen}}</div>
+      <div class="lineTxt"><div class="titleStyle" v-if="dataD.yi!=''">五行</div>{{dataD.wuxing}}</div>
       <div class="dataHours">
         <swiper
           :autoplay="true"
@@ -22,6 +22,7 @@
           :duration="500"
           :vertical="true"
           :circular="true"
+          v-if="dataHours.length!=0"
         >
           <block>
             <swiper-item v-for="(item,index) of dataHours" :key="index">
@@ -68,8 +69,8 @@ export default {
         wx.request({
             // url: baseUrl.default.juheUrl + 'laohuangli/h?date=' + timeDay + '&key=707488f53cdf13407a7f5ffc5b5b3e99',
             url:  URL.xingwl + 'api/small/time/h?date=' + timeDay + '&key=707488f53cdf13407a7f5ffc5b5b3e99',
-            success(res1) {
-                store.commit("changeDataHours",res1.data.result)
+            success(res) {
+                store.commit("changeDataHours",res.data.result)
 
             }
         })
@@ -84,7 +85,7 @@ export default {
       return store.state.dataHours
     }
   },
-  mounted(){
+  created(){
     // console.log(store)
       let time = new Date()
       let month = time.getMonth() * 1 + 1

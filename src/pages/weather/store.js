@@ -51,14 +51,23 @@ let store = new Vuex.Store({
                 "wid": { "day": "07", "night": "01" }
             },
         ],
+        // realtime: {
+        //     "aqi": "33",
+        //     "direct": "东北风",
+        //     "humidity": "78",
+        //     "info": "阴",
+        //     "power": "2级",
+        //     "temperature": "11℃",
+        //     "wid": "02"
+        // }
         realtime: {
-            "aqi": "33",
-            "direct": "东北风",
-            "humidity": "78",
-            "info": "阴",
-            "power": "2级",
-            "temperature": "11℃",
-            "wid": "02"
+            "aqi": "",
+            "direct": "",
+            "humidity": "",
+            "info": "",
+            "power": "",
+            "temperature": "",
+            "wid": ""
         }
     },
     mutations: {

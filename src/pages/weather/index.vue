@@ -2,10 +2,10 @@
   <div class="weatherContainer">
     <view :class="weatherBoxBg">
         <view class="adress">
-            <view><view class="iconfont icondingwei"></view>{{ city }}</view>
+            <view><view class="iconfont icondingwei" v-if="city!=''"></view>{{ city }}</view>
         </view>
-        <view class="temperature">{{realtime.temperature}}℃</view>
-        <view class="info">
+        <view class="temperature" v-if="realtime.temperature!=''">{{realtime.temperature}}℃</view>
+        <view class="info" v-if="realtime.info!=''">
             {{realtime.info}}
             <view style="margin:0 20rpx;">|</view>
             <view :class="airBoxBg">
@@ -13,15 +13,15 @@
                 空气：{{realtime.aqi}} {{airQ}}
             </view>
         </view>
-        <view class="info">
+        <view class="info"  v-if="realtime.direct!=''">
             <view class="iconfont iconzuobiao"></view>
             {{realtime.direct}}{{realtime.power}}
             <view class="iconfont iconwater_icon" style="margin-left:20rpx;"></view>
             {{realtime.humidity}}%
         </view>
     </view>
-    <view class="futureTitle">未来5天</view>
-    <ul class="futureBox">
+    <view class="futureTitle" v-if="weatherClass.length!=0">未来5天</view>
+    <ul class="futureBox" v-if="weatherClass.length!=0">
         <li v-for="(item,index) of weatherClass" :key="index" class="futureItem">
             <p class="futureDay">{{ item.date }}</p>
             <p class="futureWeather">{{ item.weather }}</p>
@@ -225,7 +225,7 @@ export default {
 
     },
 
-    mounted(){
+    created(){
         // console.log(URL.xingwl)
         let that = this
             //腾讯地图KEY： VINBZ-4E4CI-UUNGF-5U32E-66JDO-6RB66
